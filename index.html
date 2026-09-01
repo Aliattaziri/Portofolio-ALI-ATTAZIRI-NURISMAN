@@ -68,7 +68,7 @@
             <div class="profile-card">
               <img src="Foto ali.jpeg" alt="Ali Attaziri Nurisman" />
               <div class="profile-badge">
-                <span>Available</span>
+                <span>ORANG GANTENG</span>
               </div>
             </div>
           </div>
@@ -150,7 +150,7 @@
             <div class="skill-box reveal"><span>PHP</span></div>
             <div class="skill-box reveal"><span>MySQL</span></div>
             <div class="skill-box reveal"><span>JavaScript</span></div>
-            <div class="skill-box reveal"><span>Blade Template</span></div>
+            <div class="skill-box reveal"><span>Livewire</span></div>
             <div class="skill-box reveal"><span>Bootstrap</span></div>
             <div class="skill-box reveal"><span>REST API</span></div>
             <div class="skill-box reveal"><span>Web App Development</span></div>
@@ -223,7 +223,53 @@
           <a href="https://wa.me/6285693740283" target="_blank" rel="noreferrer" class="btn primary">Hubungi Saya</a>
         </div>
       </section>
+
+      <section class="section game-section">
+        <div class="container">
+          <div class="section-heading reveal">
+            <p class="eyebrow">Mini Game</p>
+            <h2>Cacing Pixel</h2>
+          </div>
+
+          <div class="game-wrap reveal">
+            <div class="game-topbar">
+              <div>
+                <span>Score</span>
+                <strong id="score">0</strong>
+              </div>
+              <div>
+                <span>Time</span>
+                <strong id="time">30</strong>
+              </div>
+            </div>
+
+            <div id="gameBoard" class="game-board" aria-label="Mini game area" role="application"></div>
+
+            <div class="game-controls">
+              <button id="startGameBtn" class="btn primary">Mulai Game</button>
+            </div>
+
+            <div class="turn-controls" aria-label="Controlling the worm">
+              <button class="turn-btn" data-dir="up" aria-label="Turn up">▲</button>
+              <div class="turn-row">
+                <button class="turn-btn" data-dir="left" aria-label="Turn left">◀</button>
+                <button class="turn-btn" data-dir="down" aria-label="Turn down">▼</button>
+                <button class="turn-btn" data-dir="right" aria-label="Turn right">▶</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
     </main>
+
+    <div id="soundHint" class="sound-hint">klik biar lo merinding</div>
+    <button id="soundToggle" class="sound-toggle" aria-label="Toggle sound" title="Toggle sound">
+      <span class="sound-icon">🔊</span>
+    </button>
+
+    <audio id="bgAudio" loop preload="auto">
+      <source src="TMH - Stay Focused [GANGSTER TRAP].mp3" type="audio/mpeg" />
+    </audio>
 
     <footer id="contact" class="footer">
       <div class="container footer-inner">
