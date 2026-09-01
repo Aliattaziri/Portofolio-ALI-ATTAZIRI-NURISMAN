@@ -639,12 +639,16 @@ nav a:hover {
 
 @media (max-width: 560px) {
   .topbar {
-    position: static;
+    position: sticky;
+    top: 0;
+    z-index: 50;
+    backdrop-filter: blur(14px);
   }
 
   .nav {
     min-height: auto;
     gap: 10px;
+    padding: 10px 0;
   }
 
   .brand {
@@ -656,6 +660,8 @@ nav a:hover {
   nav {
     gap: 12px 18px;
     font-size: 0.82rem;
+    flex-wrap: wrap;
+    justify-content: center;
   }
 
   .hero {
