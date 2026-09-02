@@ -636,6 +636,319 @@ nav a:hover {
   box-shadow: 0 0 24px rgba(155, 255, 107, 0.32);
 }
 
+.fullscreen-btn {
+  display: none;
+  min-width: 48px;
+}
+
+.fullscreen-btn::after {
+  content: '⛶';
+}
+
+.fullscreen-btn.exit-fs::after {
+  content: '⊗';
+}
+
+body.fullscreen-active {
+  overflow: hidden;
+}
+
+body.fullscreen-active .topbar,
+body.fullscreen-active .section-heading,
+body.fullscreen-active .sound-toggle {
+  display: none !important;
+}
+
+.game-wrap.fullscreen-mode {
+  position: fixed !important;
+  inset: 0 !important;
+  top: 0 !important;
+  left: 0 !important;
+  width: 100% !important;
+  height: 100% !important;
+  border-radius: 0 !important;
+  padding: 20px !important;
+  margin: 0 !important;
+  display: flex !important;
+  flex-direction: column !important;
+  justify-content: space-between !important;
+  align-items: center !important;
+  z-index: 99999 !important;
+  background: var(--bg) !important;
+  border: none !important;
+  box-shadow: none !important;
+}
+
+.game-wrap.fullscreen-mode .game-topbar {
+  order: 1;
+  width: 100%;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.game-wrap.fullscreen-mode .game-board {
+  order: 2;
+  width: 90vmin;
+  height: 90vmin;
+  max-width: 90vh;
+  max-height: 90vh;
+  gap: 3px;
+  padding: 10px;
+}
+
+.game-wrap.fullscreen-mode .game-controls {
+  order: 3;
+  margin-top: 20px;
+  display: flex;
+  gap: 10px;
+}
+
+.game-wrap.fullscreen-mode .turn-controls {
+  order: 4;
+  margin-top: 20px;
+}
+
+@media (max-width: 768px) {
+  .fullscreen-btn {
+    display: inline-flex;
+  }
+}
+
+.game-over-modal {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.85);
+  display: none;
+  justify-content: center;
+  align-items: center;
+  z-index: 10000;
+  backdrop-filter: blur(4px);
+  animation: fadeIn 0.3s ease;
+}
+
+.game-over-modal.show {
+  display: flex;
+}
+
+.game-over-card {
+  background: linear-gradient(145deg, rgba(18, 24, 31, 0.98), rgba(24, 35, 41, 0.95));
+  border: 2px solid rgba(155, 255, 107, 0.3);
+  border-radius: 28px;
+  padding: 48px 32px;
+  text-align: center;
+  max-width: 480px;
+  width: 90%;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.6), 0 0 40px rgba(155, 255, 107, 0.2);
+  animation: scaleIn 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.game-over-header {
+  margin-bottom: 24px;
+}
+
+.game-over-header h3 {
+  margin: 0;
+  font-size: 2.2rem;
+  color: var(--accent);
+  text-shadow: 0 0 20px rgba(255, 94, 91, 0.4);
+  letter-spacing: 0.08em;
+  font-weight: 800;
+}
+
+.game-over-text {
+  font-size: 1.1rem;
+  color: var(--text);
+  margin: 0 0 28px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  line-height: 1.4;
+}
+
+.game-over-score {
+  background: rgba(155, 255, 107, 0.08);
+  border: 1px solid rgba(155, 255, 107, 0.2);
+  border-radius: 16px;
+  padding: 20px;
+  margin-bottom: 28px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 12px;
+}
+
+.game-over-score span {
+  color: var(--muted);
+  font-size: 0.95rem;
+  font-weight: 500;
+}
+
+.game-over-score strong {
+  font-size: 2rem;
+  color: var(--primary);
+  text-shadow: 0 0 16px rgba(155, 255, 107, 0.3);
+}
+
+.game-over-modal .btn {
+  min-width: 200px;
+  font-size: 1rem;
+}
+
+.game-over-buttons {
+  display: flex;
+  gap: 12px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.game-over-buttons .btn {
+  flex: 1;
+  min-width: 140px;
+}
+
+.success-modal {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.85);
+  display: none;
+  justify-content: center;
+  align-items: center;
+  z-index: 10000;
+  backdrop-filter: blur(4px);
+  animation: fadeIn 0.3s ease;
+}
+
+.success-modal.show {
+  display: flex;
+}
+
+.success-card {
+  background: linear-gradient(145deg, rgba(18, 24, 31, 0.98), rgba(24, 35, 41, 0.95));
+  border: 2px solid rgba(102, 217, 232, 0.4);
+  border-radius: 28px;
+  padding: 48px 32px;
+  text-align: center;
+  max-width: 480px;
+  width: 90%;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.6), 0 0 60px rgba(102, 217, 232, 0.25);
+  animation: scaleIn 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.crown-icon {
+  font-size: 4rem;
+  margin-bottom: 20px;
+  animation: crownBounce 0.8s ease-in-out infinite;
+}
+
+.success-header {
+  margin-bottom: 16px;
+}
+
+.success-header h3 {
+  margin: 0;
+  font-size: 2.2rem;
+  background: linear-gradient(135deg, var(--primary), var(--primary-2));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  letter-spacing: 0.08em;
+  font-weight: 800;
+  text-shadow: 0 0 30px rgba(102, 217, 232, 0.3);
+}
+
+.success-text {
+  font-size: 1.1rem;
+  color: var(--text);
+  margin: 0 0 24px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  line-height: 1.4;
+}
+
+.success-score {
+  background: rgba(102, 217, 232, 0.08);
+  border: 1px solid rgba(102, 217, 232, 0.2);
+  border-radius: 16px;
+  padding: 20px;
+  margin-bottom: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 12px;
+}
+
+.success-score span {
+  color: var(--muted);
+  font-size: 0.95rem;
+  font-weight: 500;
+}
+
+.success-score strong {
+  font-size: 2rem;
+  color: var(--primary);
+  text-shadow: 0 0 16px rgba(155, 255, 107, 0.3);
+}
+
+.countdown-timer {
+  font-size: 3rem;
+  color: var(--primary-2);
+  font-weight: 800;
+  margin-bottom: 20px;
+  text-shadow: 0 0 20px rgba(102, 217, 232, 0.4);
+  animation: timerPulse 1s ease-in-out infinite;
+}
+
+.success-buttons {
+  display: flex;
+  gap: 12px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.success-buttons .btn {
+  flex: 1;
+  min-width: 140px;
+}
+
+@keyframes crownBounce {
+  0%, 100% {
+    transform: translateY(0) scale(1);
+  }
+  50% {
+    transform: translateY(-10px) scale(1.05);
+  }
+}
+
+@keyframes timerPulse {
+  0%, 100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  50% {
+    transform: scale(1.1);
+    opacity: 0.8;
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes scaleIn {
+  from {
+    transform: scale(0.85) translateY(-20px);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1) translateY(0);
+    opacity: 1;
+  }
+}
+
 .footer {
   padding: 22px 0 48px;
 }

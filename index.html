@@ -247,6 +247,7 @@
 
             <div class="game-controls">
               <button id="startGameBtn" class="btn primary">Mulai Game</button>
+              <button id="fullscreenBtn" class="btn secondary fullscreen-btn" aria-label="Fullscreen mode" title="Fullscreen"></button>
             </div>
 
             <div class="turn-controls" aria-label="Controlling the worm">
@@ -261,6 +262,42 @@
         </div>
       </section>
     </main>
+
+    <div id="gameOverModal" class="game-over-modal">
+      <div class="game-over-card">
+        <div class="game-over-header">
+          <h3>GAME OVER</h3>
+        </div>
+        <p class="game-over-text">ELO GAME OVER LAGIAN BOOT BANGET</p>
+        <div class="game-over-score">
+          <span>Skor Akhir:</span>
+          <strong id="finalScore">0</strong>
+        </div>
+        <div class="game-over-buttons">
+          <button id="retryBtn" class="btn primary">Coba Lagi</button>
+          <button id="closeBtn" class="btn secondary">Tidak</button>
+        </div>
+      </div>
+    </div>
+
+    <div id="successModal" class="success-modal">
+      <div class="success-card">
+        <div class="crown-icon">👑</div>
+        <div class="success-header">
+          <h3>CONGRATULATIONS!</h3>
+        </div>
+        <p class="success-text">iya elo jago tapi masih jagoan gue kali #ali</p>
+        <div class="success-score">
+          <span>Total Score:</span>
+          <strong id="successScore">0</strong>
+        </div>
+        <div class="countdown-timer" id="countdownTimer">15</div>
+        <div class="success-buttons">
+          <button id="successRetryBtn" class="btn primary">Coba Lagi</button>
+          <button id="successCloseBtn" class="btn secondary">Tutup</button>
+        </div>
+      </div>
+    </div>
 
     <div id="soundHint" class="sound-hint">klik biar lo merinding</div>
     <button id="soundToggle" class="sound-toggle" aria-label="Toggle sound" title="Toggle sound">

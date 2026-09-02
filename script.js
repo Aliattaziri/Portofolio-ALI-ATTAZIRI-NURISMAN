@@ -44,10 +44,11 @@ document.addEventListener("DOMContentLoaded", () => {
   let direction = { x: 1, y: 0 };
   let nextDirection = { x: 1, y: 0 };
   let score = 0;
-  let timeLeft = 30;
+  let timeLeft = 15;
   let moveTimerId = null;
   let countdownTimerId = null;
   let gameActive = false;
+  let successCountdownTimerId = null;
 
   function createBoard() {
     board.innerHTML = "";
@@ -139,16 +140,21 @@ document.addEventListener("DOMContentLoaded", () => {
     timeEl.textContent = timeLeft;
 
     if (timeLeft <= 0) {
-      endGame();
+      endGame("success");
     }
   }
 
   function startGame() {
     gameActive = true;
     score = 0;
-    timeLeft = 30;
+    timeLeft = 15;
     scoreEl.textContent = score;
     timeEl.textContent = timeLeft;
+
+    // Hide game over modal
+    gameOverModal.classList.remove("show");
+    successModal.classList.remove("show");
+    clearInterval(successCountdownTimerId);
 
     snake = [
       { x: 3, y: 5 },
@@ -166,11 +172,38 @@ document.addEventListener("DOMContentLoaded", () => {
     countdownTimerId = setInterval(countdown, 1000);
   }
 
-  function endGame() {
+  function endGame(reason = "failure") {
     gameActive = false;
     clearInterval(moveTimerId);
     clearInterval(countdownTimerId);
-    alert("Game over! Skor akhir: " + score);
+    
+    if (reason === "success") {
+      // Show success modal
+      const successScoreEl = document.getElementById("successScore");
+      successScoreEl.textContent = score;
+      successModal.classList.add("show");
+      
+      // Start countdown for auto-dismiss
+      let successCountdown = 15;
+      const countdownTimerEl = document.getElementById("countdownTimer");
+      countdownTimerEl.textContent = successCountdown;
+      
+      clearInterval(successCountdownTimerId);
+      successCountdownTimerId = setInterval(() => {
+        successCountdown -= 1;
+        countdownTimerEl.textContent = successCountdown;
+        
+        if (successCountdown <= 0) {
+          clearInterval(successCountdownTimerId);
+          successModal.classList.remove("show");
+        }
+      }, 1000);
+    } else {
+      // Show failure modal
+      const finalScoreEl = document.getElementById("finalScore");
+      finalScoreEl.textContent = score;
+      gameOverModal.classList.add("show");
+    }
   }
 
   document.addEventListener("keydown", (event) => {
@@ -211,6 +244,65 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 
   startBtn.addEventListener("click", startGame);
+
+  // Game Over Modal
+  const gameOverModal = document.getElementById("gameOverModal");
+  const retryBtn = document.getElementById("retryBtn");
+  const closeBtn = document.getElementById("closeBtn");
+
+  retryBtn.addEventListener("click", () => {
+    gameOverModal.classList.remove("show");
+    startGame();
+  });
+
+  closeBtn.addEventListener("click", () => {
+    gameOverModal.classList.remove("show");
+  });
+
+  // Success Modal
+  const successModal = document.getElementById("successModal");
+  const successRetryBtn = document.getElementById("successRetryBtn");
+  const successCloseBtn = document.getElementById("successCloseBtn");
+
+  successRetryBtn.addEventListener("click", () => {
+    successModal.classList.remove("show");
+    clearInterval(successCountdownTimerId);
+    startGame();
+  });
+
+  successCloseBtn.addEventListener("click", () => {
+    successModal.classList.remove("show");
+    clearInterval(successCountdownTimerId);
+  });
+
+  // Fullscreen functionality
+  const fullscreenBtn = document.getElementById("fullscreenBtn");
+  const gameWrap = document.querySelector(".game-wrap");
+
+  function toggleFullscreen() {
+    if (!gameWrap.classList.contains("fullscreen-mode")) {
+      // Enter fullscreen
+      gameWrap.classList.add("fullscreen-mode");
+      document.body.classList.add("fullscreen-active");
+      fullscreenBtn.classList.add("exit-fs");
+      fullscreenBtn.title = "Exit fullscreen";
+    } else {
+      // Exit fullscreen
+      gameWrap.classList.remove("fullscreen-mode");
+      document.body.classList.remove("fullscreen-active");
+      fullscreenBtn.classList.remove("exit-fs");
+      fullscreenBtn.title = "Fullscreen";
+    }
+  }
+
+  fullscreenBtn.addEventListener("click", toggleFullscreen);
+
+  // Handle ESC key for fullscreen exit
+  document.addEventListener("keydown", (e) => {
+    if (e.key === "Escape" && gameWrap.classList.contains("fullscreen-mode")) {
+      toggleFullscreen();
+    }
+  });
 
   const soundToggle = document.getElementById("soundToggle");
   const bgAudio = document.getElementById("bgAudio");
