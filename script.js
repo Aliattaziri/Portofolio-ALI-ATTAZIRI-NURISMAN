@@ -181,6 +181,29 @@ document.addEventListener("DOMContentLoaded", () => {
     if (key === "arrowright" || key === "d") setDirection("right");
   });
 
+  let touchStartX = 0;
+  let touchStartY = 0;
+
+  board.addEventListener("touchstart", (event) => {
+    const touch = event.changedTouches[0];
+    touchStartX = touch.clientX;
+    touchStartY = touch.clientY;
+  }, { passive: true });
+
+  board.addEventListener("touchend", (event) => {
+    const touch = event.changedTouches[0];
+    const deltaX = touch.clientX - touchStartX;
+    const deltaY = touch.clientY - touchStartY;
+
+    if (Math.abs(deltaX) < 20 && Math.abs(deltaY) < 20) return;
+
+    if (Math.abs(deltaX) > Math.abs(deltaY)) {
+      setDirection(deltaX > 0 ? "right" : "left");
+    } else {
+      setDirection(deltaY > 0 ? "down" : "up");
+    }
+  }, { passive: true });
+
   document.querySelectorAll(".turn-btn").forEach((button) => {
     button.addEventListener("click", () => {
       setDirection(button.dataset.dir);

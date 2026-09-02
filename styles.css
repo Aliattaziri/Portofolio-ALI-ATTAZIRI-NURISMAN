@@ -567,22 +567,25 @@ nav a:hover {
   border-radius: 8px;
   background: rgba(255, 255, 255, 0.04);
   border: 1px solid rgba(255,255,255,0.03);
-  transition: transform 0.08s ease, background 0.08s ease;
+  transition: transform 0.08s ease, background 0.08s ease, box-shadow 0.2s ease;
 }
 
 .game-cell.snake {
   background: linear-gradient(135deg, var(--primary), var(--primary-2));
   box-shadow: 0 0 12px rgba(155, 255, 107, 0.25);
+  animation: pixelPulse 1.2s ease-in-out infinite alternate;
 }
 
 .game-cell.head {
   background: linear-gradient(135deg, #b8ff7a, #67f0a3);
-  box-shadow: 0 0 14px rgba(155, 255, 107, 0.55);
+  box-shadow: 0 0 16px rgba(155, 255, 107, 0.7), 0 0 22px rgba(103, 240, 163, 0.35);
+  animation: headGlow 0.75s ease-in-out infinite alternate;
 }
 
 .game-cell.food {
   background: linear-gradient(135deg, #ffd166, #ff8d5c);
   box-shadow: 0 0 12px rgba(255, 209, 102, 0.4);
+  animation: foodBounce 0.8s ease-in-out infinite alternate;
 }
 
 .game-controls {
@@ -618,10 +621,19 @@ nav a:hover {
   touch-action: manipulation;
   user-select: none;
   -webkit-tap-highlight-color: transparent;
+  box-shadow: 0 0 0 rgba(102, 217, 232, 0);
+  transition: transform 0.15s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+}
+
+.turn-btn:hover {
+  transform: translateY(-2px);
+  border-color: rgba(155, 255, 107, 0.6);
+  box-shadow: 0 0 18px rgba(102, 217, 232, 0.22);
 }
 
 .turn-btn:active {
   transform: scale(0.96);
+  box-shadow: 0 0 24px rgba(155, 255, 107, 0.32);
 }
 
 .footer {
@@ -737,6 +749,35 @@ nav a:hover {
   }
   100% {
     transform: perspective(1200px) rotateY(10deg) rotateX(-4deg) translateY(-6px);
+  }
+}
+
+@keyframes pixelPulse {
+  0% {
+    transform: scale(0.96);
+    box-shadow: 0 0 10px rgba(155, 255, 107, 0.18);
+  }
+  100% {
+    transform: scale(1);
+    box-shadow: 0 0 18px rgba(155, 255, 107, 0.32);
+  }
+}
+
+@keyframes headGlow {
+  0% {
+    filter: brightness(1);
+  }
+  100% {
+    filter: brightness(1.25);
+  }
+}
+
+@keyframes foodBounce {
+  0% {
+    transform: scale(0.9);
+  }
+  100% {
+    transform: scale(1.08);
   }
 }
 
