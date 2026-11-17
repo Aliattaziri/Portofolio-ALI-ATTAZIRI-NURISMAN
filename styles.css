@@ -965,17 +965,57 @@ body.fullscreen-active .sound-toggle {
 .contact-list {
   display: flex;
   flex-wrap: wrap;
-  gap: 18px;
+  gap: 10px 12px;
   color: var(--muted);
 }
 
 .contact-list a {
-  transition: color 0.2s ease, text-shadow 0.2s ease;
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+  padding: 8px 11px;
+  border: 1px solid transparent;
+  border-radius: 12px;
+  transition:
+    color 0.2s ease,
+    background-color 0.2s ease,
+    border-color 0.2s ease,
+    transform 0.2s ease;
 }
 
 .contact-list a:hover {
   color: var(--primary);
-  text-shadow: 0 0 10px rgba(155, 255, 107, 0.3);
+  background: rgba(37, 99, 235, 0.12);
+  border-color: rgba(56, 189, 248, 0.24);
+  transform: translateY(-2px);
+}
+
+.contact-icon {
+  width: 20px;
+  height: 20px;
+  flex: 0 0 20px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.7;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  color: #7dd3fc;
+  transition: color 0.2s ease, transform 0.2s ease;
+}
+
+.contact-icon-github {
+  fill: currentColor;
+  stroke: none;
+}
+
+.contact-icon-dot {
+  fill: currentColor;
+  stroke: none;
+}
+
+.contact-list a:hover .contact-icon {
+  color: #bfdbfe;
+  transform: scale(1.08);
 }
 
 .sound-hint {
