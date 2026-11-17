@@ -8,23 +8,34 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   });
 
-  const revealElements = document.querySelectorAll(".reveal");
-
-  const revealObserver = new IntersectionObserver(
-    (entries) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add("visible");
-          revealObserver.unobserve(entry.target);
-        }
-      });
-    },
-    {
-      threshold: 0.15,
-    }
+  const revealElements = document.querySelectorAll(
+    ".section-heading, .about-grid > *, .story-card, .skill-box, .project-card, .cta-box, .game-wrap"
   );
 
-  revealElements.forEach((element) => revealObserver.observe(element));
+  revealElements.forEach((element, index) => {
+    element.classList.add("reveal");
+    element.style.transitionDelay = `${(index % 4) * 90}ms`;
+  });
+
+  if ("IntersectionObserver" in window) {
+    const revealObserver = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("visible");
+            revealObserver.unobserve(entry.target);
+          }
+        });
+      },
+      {
+        threshold: 0.12,
+      }
+    );
+
+    revealElements.forEach((element) => revealObserver.observe(element));
+  } else {
+    revealElements.forEach((element) => element.classList.add("visible"));
+  }
 
   const board = document.getElementById("gameBoard");
   const scoreEl = document.getElementById("score");
